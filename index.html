@@ -18,7 +18,7 @@
 	<script>
 		$.getJSON('https://api.github.com/repos/tccoin/Kr/contents/',function(r){
 			console.log(r);
-			$('#file_list').html('<strong>列表</strong><br>');
+			$('#file_list').html('<strong>文件</strong><br>');
 			for(var i=0;i<r.length;i++){
 				var file = r[i];
 				console.log(file.name);
