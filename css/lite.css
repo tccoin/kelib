@@ -18,4 +18,8 @@ body {
 }
 .footer .info a{
     color: rgb(102, 102, 102);
+}.subdir {
+    margin-left: 55px;
+    padding-left: 5px;
+    border-left: 1px solid rgb(205, 205, 205);
 }

@@ -14,20 +14,79 @@
 </head>
 <body>
 	<h1>Kelib</h1>
-	<div id="file_list">Lib Loading...</div>
+	<div id="file_list">
+		<div id="loading">Lib Loading...</div>
+	</div>
 	<div class="footer">
 		<p class="info">Kelib stands for Kelib E-book Library.Made By <a href="http://krrxue.duapp.com/md/">Kr</a>.</p>
 	</div>
 	<script>
-		$.getJSON('https://api.github.com/repos/tccoin/Kr/contents/',function(r){
-			console.log(r);
-			$('#file_list').html('<strong>文件</strong><br>');
-			for(var i=0;i<r.length;i++){
-				var file = r[i];
-				console.log(file.name);
-				$('#file_list').append('<a href="'+file.download_url+'">'+file.name+'</p>');
+		var dirNumberDic = [];
+				
+		function getRepoContents(path){
+			var dirName = getDirName(path),
+				sectionName = getSectionName(path),
+				dirNumber = dirNumberDic.length;
+			dirNumberDic.push([dirName,dirNumber]);
+			$('#file_list #loading').empty();
+			
+			var t = path==''?'':' #dir_'+getParentDirNumber(path);
+			console.log(t);
+			$('#file_list'+t).append('<div class="subdir" id="dir_'+dirNumber+'" data-dir-name="'+dirName+'"><strong>'+sectionName+'</strong><br></div>');
+			
+			$.getJSON('https://api.github.com/repos/tccoin/Kr/contents/'+path,function(r){
+				console.log(r);
+				for(var i=0;i<r.length;i++){
+					var file = r[i];
+					if(file.type == 'dir'){
+						getRepoContents(file.path);
+					}else{
+						$('#file_list #dir_'+getDirNumber(path)).append('<a href="'+file.download_url+'">'+file.name+'</p>');
+					}
+				}
+				dirNumber++;
+			});
+		}
+		
+		function getSectionName(path){
+			var sectionNameDic = [
+				['','根目录']
+			];
+			for (var i=0;i<sectionNameDic.length;i++){
+				var section = sectionNameDic[i];
+				if(section[0] == path){
+					return section[1];
+				}
 			}
-		});
+			return getDirName(path);
+		}
+		
+		function getParentDirNumber(path){
+			var a = ('/'+path).split('/');
+			a.pop();
+			return getDirNumber(a[a.length-1]);
+		}
+		function getDirNumber(path){
+			var dirName = getDirName(path);
+			for (var i=0;i<dirNumberDic.length;i++){
+				var dir = dirNumberDic[i];
+				if(dir[0] == dirName){
+					return dir[1];
+				}
+			}
+			return 0;
+		}
+		
+		function getDirName(path){
+			var a = path.split('/'),
+				b = a.pop();
+			if(b.indexOf('.') > -1){
+				b = a.pop().pop();
+			}
+			return b;
+		}
+		
+		getRepoContents('');
 	</script>
 </body>
 </html>
