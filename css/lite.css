@@ -6,11 +6,11 @@ html, body {
 }
 body {
     max-width: 800px;
-    margin: 10vh auto 0;
+    margin: 10vh auto;
 }
 .footer {
     position: absolute;
-    bottom: 10vh;
+    bottom: 0;
 }
 
 .footer .info {
