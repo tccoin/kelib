@@ -1,1 +1,30 @@
-My Page
+<!DOCTYPE HTML>
+<html lang="zh-cmn-Hans">
+<head>
+    <title>Kr</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <meta name="theme-color" content="#486E62">
+    <meta name="mobile-web-app-capable" content="yes">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <link rel="stylesheet" href="./css/typo.css">
+    <link rel="stylesheet" href="./css/lite.css">
+    <script src="./js/jquery-1.11.3.min.js"></script>
+</head>
+<body>
+	<h1>Kr Lib</h1>
+	<div id="file_list">Lib Loading...</div>
+	<script>
+		$.getJSON('https://api.github.com/repos/tccoin/Kr/contents/',function(r){
+			console.log(r);
+			$('#file_list').html('<strong>列表</strong><br>');
+			for(var i=0;i<r.length;i++){
+				var file = r[i];
+				console.log(file.name);
+				$('#file_list').append('<a href="'+file.download_url+'">'+file.name+'</p>');
+			}
+		});
+	</script>
+</body>
+</html>
