@@ -1,10 +1,21 @@
-a,html{
+a,html {
     color: #3A4145;
 }
-html, body{
-    height:100%;
+html, body {
+    min-height: 100%;
 }
-body{
+body {
     max-width: 800px;
     margin: 10vh auto 0;
+}
+.footer {
+    position: absolute;
+    bottom: 10vh;
+}
+
+.footer .info {
+    color: rgb(153, 153, 153);
+}
+.footer .info a{
+    color: rgb(102, 102, 102);
 }
