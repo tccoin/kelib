@@ -2,6 +2,7 @@
 <html lang="zh-cmn-Hans">
 <head>
     <title>Kelib</title>
+	<meta http-equiv="content-type" content="text/html;charset=utf-8">
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <meta http-equiv="Cache-Control" content="no-siteapp" />
@@ -38,8 +39,8 @@
 			$('#file_list'+t).append('<div class="subdir" id="dir_'+dirNumber+'" data-dir-name="'+dirName+'"><strong>'+sectionName+'</strong><br></div>');
 			
 			$.ajax({url:'https://api.github.com/repos/tccoin/Kr/contents/'+path,dataType:'text',success:function(r){
+				alert(r);
 				r = JSON.parse(r);
-				console.log(r);
 				window.r= r;
 				for(var i=0;i<r.length;i++){
 					var file = r[i];
