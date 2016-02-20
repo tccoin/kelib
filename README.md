@@ -1,2 +1,2 @@
 # Kr Lib
-[项目主页](http://tccoin.github.io/Kr/)
+[项目主页](http://tccoin.github.io/kelib/)
