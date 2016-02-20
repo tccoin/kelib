@@ -6,19 +6,29 @@ html, body {
 }
 body {
     max-width: 800px;
-    margin: 10vh auto;
+    margin: 200px auto 100px;
 }
-.footer {
-    position: absolute;
-    bottom: 0;
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 28px 0;
+    background: rgba(255,255,255,0.97);
+    box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.24);
 }
-
-.footer .info {
+.header-wrapper {
+    max-width: 800px;
+    margin: auto;
+}
+.header .info {
     color: rgb(153, 153, 153);
 }
-.footer .info a{
+.header .info a{
     color: rgb(102, 102, 102);
-}.subdir {
+}
+
+.subdir {
     margin-left: 55px;
     padding-left: 5px;
     border-left: 1px solid rgb(205, 205, 205);
