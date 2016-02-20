@@ -11,7 +11,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
     <link rel="stylesheet" href="./css/typo.css">
     <link rel="stylesheet" href="./css/lite.css">
-    <script src="./js/jquery-1.11.3.min.js"></script>
+    <script src="./js/jquery-1.12.0.min.js"></script>
     <script src="./js/json2.js"></script>
 </head>
 <body>
@@ -38,10 +38,9 @@
 			console.log(t);
 			$('#file_list'+t).append('<div class="subdir" id="dir_'+dirNumber+'" data-dir-name="'+dirName+'"><strong>'+sectionName+'</strong><br></div>');
 			
-			$.ajax({url:'https://api.github.com/repos/tccoin/Kr/contents/'+path,dataType:'text',success:function(r){
-				alert(r);
-				r = JSON.parse(r);
-				window.r= r;
+			$.ajax({url:'https://api.github.com/repos/tccoin/Kr/contents/'+path,crossDomain:true,dataType:'jsonp',success:function(r){
+                console.log(r);
+				r = JSON.parse(r.responseText);
 				for(var i=0;i<r.length;i++){
 					var file = r[i];
 					if(file.type == 'dir'){
@@ -61,7 +60,6 @@
 			];
 			for (var i=0;i<sectionNameDic.length;i++){
 				var section = sectionNameDic[i];
-				console.log(i);
 				if(section[0] == path){
 					return section[1];
 				}
