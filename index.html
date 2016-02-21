@@ -39,17 +39,19 @@
 			$('#file_list'+t).append('<div class="subdir" id="dir_'+dirNumber+'" data-dir-name="'+dirName+'"><strong>'+sectionName+'</strong><br></div>');
 			
 			$.ajax({url:'https://api.github.com/repos/tccoin/Kr/contents/'+path,crossDomain:true,dataType:'jsonp',success:function(r){
-                console.log(r);
-				r = JSON.parse(r.responseText);
-				for(var i=0;i<r.length;i++){
-					var file = r[i];
-					if(file.type == 'dir'){
-						getRepoContents(file.path);
-					}else{
-						$('#file_list #dir_'+getDirNumber(path)).append('<a href="'+file.download_url+'">'+file.name+'</p>');
+				$.ajax({url:r.data.url,crossDomain:true,dataType:'jsonp',success:function(r){
+					console.log(r.meta);
+					r = r.data;
+					for(var i=0;i<r.length;i++){
+						var file = r[i];
+						if(file.type == 'dir'){
+							getRepoContents(file.path);
+						}else{
+							$('#file_list #dir_'+getDirNumber(path)).append('<a href="'+file.download_url+'">'+file.name+'</p>');
+						}
 					}
-				}
-				dirNumber++;
+					dirNumber++;
+				}});
 			}});
 		}
 		
